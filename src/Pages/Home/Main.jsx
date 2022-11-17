@@ -2,10 +2,173 @@ import React from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-
+import Countdown from 'react-countdown'
 export default function Main() {
+    const Completionist = () => <span>HAPPY NEW YEAR 2023 </span>
+    const renderer = ({ days, hours, minutes, seconds, completed }) => {
+        if (completed) {
+            return <Completionist />
+        } else {
+            return (
+                <div className="pt-5">
+                    <div class="flex sm:flex-row flex-col space-y-2 sm:space-x-2 flex-row w-full items-center justify-center">
+                        <div class="flex flex-wrap flex-row sm:flex-col justify-center items-center w-full sm:w-1/4 p-5 bg-white rounded-md shadow-xl border-l-4 border-blue-300">
+                            <div class="flex justify-between w-full">
+                                <div>
+                                    <div class="p-2">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="1.5"
+                                            stroke="currentColor"
+                                            class="w-6 h-6"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"
+                                            />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex items-center text-xs px-3 bg-blue-200 text-blue-800 rounded-full">
+                                        25%
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="font-bold text-5xl">{days}</div>
+                                <div class="font-bold text-sm text-center">
+                                    Days
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap flex-row sm:flex-col justify-center items-center w-full sm:w-1/4 p-5 bg-white rounded-md shadow-xl border-l-4 border-purple-300">
+                            <div class="flex justify-between w-full">
+                                <div>
+                                    <div class="p-2">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="1.5"
+                                            stroke="currentColor"
+                                            class="w-6 h-6"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                                            />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex items-center text-xs px-3 bg-purple-200 text-purple-800 rounded-full">
+                                        75%
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="font-bold text-5xl text-center">
+                                    {hours}
+                                </div>
+                                <div class="font-bold text-sm text-center">
+                                    Hours
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap flex-row sm:flex-col justify-center items-center w-full sm:w-1/4 p-5 bg-white rounded-md shadow-xl border-l-4 border-red-300">
+                            <div class="flex justify-between w-full">
+                                <div>
+                                    <div class="p-2">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="1.5"
+                                            stroke="currentColor"
+                                            class="w-6 h-6"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                                            />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex items-center text-xs px-3 bg-red-200 text-red-800 rounded-full">
+                                        100%
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="font-bold text-5xl text-center">
+                                    {minutes}
+                                </div>
+                                <div class="font-bold text-sm text-center">
+                                    Minutes
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap flex-row sm:flex-col justify-center items-center w-full sm:w-1/4 p-5 bg-white rounded-md shadow-xl border-l-4 border-green-300">
+                            <div class="flex justify-between w-full">
+                                <div>
+                                    <div class="p-2">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="1.5"
+                                            stroke="currentColor"
+                                            class="w-6 h-6"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                                            />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex items-center text-xs px-3 bg-green-200 text-green-800 rounded-full">
+                                        25%
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="font-bold text-5xl text-center">
+                                    {seconds}
+                                </div>
+                                <div class="font-bold text-sm text-center">
+                                    Seconds
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+    }
     return (
         <>
+            <section>
+                <div className="bg-white py-6 flex flex-col justify-center items-center">
+                    <span className="text-sm font-bold text-600 text-3xl text-center">
+                        Lunar New Year is coming soon
+                    </span>
+                    <Countdown
+                        className="text-xl p-4"
+                        date={'2023-01-01T00:00:00'}
+                        renderer={renderer}
+                    />
+                </div>
+            </section>
             <section>
                 <div class=" bg-white py-6 flex flex-col justify-center items-center">
                     <div class="w-full max-w-xl border border-gray-300 rounded-2xl py-3 px-5">
