@@ -1,5 +1,5 @@
 import Login from 'Components/Auth/Login'
-import Register from 'Components/Auth/Register'
+// import Register from 'Components/Auth/Register'
 import AuthPage from 'Pages/Auth'
 import HomePage from 'Pages/Home'
 import Blog from 'Pages/Home/Blog'
@@ -42,7 +42,7 @@ function App() {
                 <Route path="blog/:slug" element={<PostsPage />} />
                 <Route path="auth" element={<AuthPage />}>
                     <Route path="login" element={<Login />} />
-                    <Route path="register" element={<Register />} />
+                    {/* <Route path="register" element={<Register />} /> */}
                 </Route>
                 <Route path="blog/:slug" element={<PostsPage />} />
                 <Route path="/" element={<HomePage />}>
@@ -50,18 +50,15 @@ function App() {
                     <Route path="project" element={<LearningPage />}>
                         <Route path="" element={<Learning />} />
                         <Route
-                            path="front-end-development"
+                            path="savvy-fitness"
                             element={<TypeLearning />}
                         />
-                        <Route
-                            path="back-end-development"
-                            element={<TypeLearning />}
-                        />
+                        <Route path="savvy-ai" element={<TypeLearning />} />
                     </Route>
-                    <Route path="courses" element={<CoursesPage />}>
+                    {/* <Route path="courses" element={<CoursesPage />}>
                         <Route path="" element={<Courses />} />
                         <Route path=":slug" element={<Details />} />
-                    </Route>
+                    </Route> */}
                     <Route path="me/bookmark/posts" element={<BookMark />} />
                     <Route path="blog" element={<Blog />} />
                 </Route>

@@ -23,7 +23,7 @@ export default function Project() {
                                 và đánh giá độ chính xác của các bài tập, cơ chế
                                 to earn để giúp học viên có thêm thu nhập ...
                             </p>
-                            <Link to="front-end-development">
+                            <Link to="savvy-fitness">
                                 <button className="text-white py-2 px-4  w-full text-center sm:w-auto rounded-full font-semibold bg-orange-500">
                                     Xem chi tiết
                                 </button>
@@ -48,7 +48,7 @@ export default function Project() {
                                 và phát triển đóng gói module, giải pháp , các
                                 bài toán về blockchain ...
                             </p>
-                            <Link to="back-end-development">
+                            <Link to="savvy-fitness">
                                 <button className="text-white w-full text-center sm:w-auto py-2 px-4 rounded-full font-semibold bg-orange-500">
                                     Xem chi tiết
                                 </button>
@@ -72,7 +72,7 @@ export default function Project() {
                                 trên các sàn thương mại điện tử như Shopee,
                                 Lazada, Tiki...
                             </p>
-                            <Link to="back-end-development">
+                            <Link to="savvy-fitness">
                                 <button className="text-white w-full text-center sm:w-auto py-2 px-4 rounded-full font-semibold bg-orange-500">
                                     Xem chi tiết
                                 </button>
