@@ -1,21 +1,16 @@
 import Login from 'Components/Auth/Login'
-// import Register from 'Components/Auth/Register'
 import AuthPage from 'Pages/Auth'
 import HomePage from 'Pages/Home'
 import Blog from 'Pages/Home/Blog'
 import LearningPage from 'Pages/Home/Learning'
 import Learning from 'Pages/Home/Learning/Learning'
-import TypeLearning from 'Pages/Home/Learning/TypeLearning'
 import Main from 'Pages/Home/Main'
 import NotFound from 'Pages/NotFound'
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import CoursesPage from 'Pages/Home/Courses'
 import PostsPage from 'Pages/Posts'
 import CreatePostPage from 'Pages/CreatePost'
 import PersonalPage from 'Pages/Personal'
-import Courses from 'Pages/Home/Courses/Courses'
-import Details from 'Pages/Home/Courses/Details'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import BookMark from 'Pages/Home/BookMark'
@@ -49,16 +44,7 @@ function App() {
                     <Route path="" element={<Main />} />
                     <Route path="project" element={<LearningPage />}>
                         <Route path="" element={<Learning />} />
-                        <Route
-                            path="savvy-fitness"
-                            element={<TypeLearning />}
-                        />
-                        <Route path="savvy-ai" element={<TypeLearning />} />
                     </Route>
-                    {/* <Route path="courses" element={<CoursesPage />}>
-                        <Route path="" element={<Courses />} />
-                        <Route path=":slug" element={<Details />} />
-                    </Route> */}
                     <Route path="me/bookmark/posts" element={<BookMark />} />
                     <Route path="blog" element={<Blog />} />
                 </Route>
