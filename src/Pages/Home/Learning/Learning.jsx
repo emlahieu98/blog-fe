@@ -32,7 +32,7 @@ export default function Project() {
                         <div className="w-[125px] h-[125px] hidden sm:block rounded-full border-4 border-orange-500 flex-shrink-0">
                             <img
                                 className="object-cover rounded-full w-full h-full"
-                                src="https://files.fullstack.edu.vn/f8-prod/learning-paths/2/61a0439062b82.png"
+                                src="/favicon/logo.png"
                                 alt=""
                             />
                         </div>
@@ -57,7 +57,7 @@ export default function Project() {
                         <div className="w-[125px] h-[125px] hidden sm:block  rounded-full border-4 border-orange-500 flex-shrink-0">
                             <img
                                 className="object-cover rounded-full w-full h-full"
-                                src="https://files.fullstack.edu.vn/f8-prod/learning-paths/2/61a0439062b82.png"
+                                src="/favicon/logo.png"
                                 alt=""
                             />
                         </div>
@@ -81,7 +81,7 @@ export default function Project() {
                         <div className="w-[125px] h-[125px] hidden sm:block  rounded-full border-4 border-orange-500 flex-shrink-0">
                             <img
                                 className="object-cover rounded-full w-full h-full"
-                                src="https://files.fullstack.edu.vn/f8-prod/learning-paths/2/61a0439062b82.png"
+                                src="/favicon/logo.png"
                                 alt=""
                             />
                         </div>
