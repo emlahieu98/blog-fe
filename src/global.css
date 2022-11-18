@@ -40,9 +40,9 @@ body::-webkit-scrollbar-thumb {
   height: 8px !important;
 }
 .tuyn-slick .slick-dots {
-  width: auto !important;
-  bottom: -33px !important;
-  left: 30px;
+  /* width: auto !important; */
+  /* bottom: -33px !important; */
+  /* left: 30px; */
 }
 .tuyn-editor .rc-md-editor .editor-container .sec-md .input {
   overflow-y: visible;
