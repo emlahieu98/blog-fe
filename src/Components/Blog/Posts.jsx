@@ -7,7 +7,6 @@ import DayJs from 'Utils/DayJs'
 
 // export default function Posts({ posts }) {
 export default function Posts({ posts }) {
-    console.log('🚀 ~ file: Posts.jsx ~ line 10 ~ Posts ~ posts', posts)
     const [Posts, setPosts] = useState(posts)
     useEffect(() => {
         setPosts(posts)
@@ -32,11 +31,14 @@ export default function Posts({ posts }) {
                 <div className="flex items-center gap-2">
                     <img
                         className="w-8 h-8 object-cover rounded-full"
-                        src={Posts?.userId?.avatar}
+                        src={
+                            Posts?.userId?.avatar ||
+                            'https://yt3.ggpht.com/m3aEIKqYP-rYVvKgjqJObR6-UDgEcBj52re__8VZn38DfiFSu4U1-XyB9F3Lcj_FcT5xZYnaMA=s900-c-k-c0x00ffffff-no-rj'
+                        }
                         alt=""
                     />
                     <h3 className="text-sm font-medium capitalize">
-                        {Posts?.userId?.fullName}
+                        {Posts?.user_name || 'emlahieu'}
                     </h3>
                 </div>
                 <div className="flex gap-3">
@@ -75,20 +77,27 @@ export default function Posts({ posts }) {
                 <div className="flex justify-between gap-4 items-center flex-wrap sm:flex-nowrap">
                     <div className="order-2 sm:order-1">
                         <h1 className="text-xl font-bold mb-3">
-                            {Posts?.heading}
+                            {Posts?.title}
                         </h1>
                         <p className="text-sm text-slate-600 mb-3">
-                            {Posts?.descriptions}
+                            {Posts?.content.slice(0, 150)}...
                         </p>
                         <span className="text-sm mr-3">
-                            {DayJs.from(Posts?.createdAt)}
+                            {DayJs.from(
+                                Posts?.createdAt || '2022-11-23T08:43:02'
+                            )}
                         </span>
-                        <span className="text-sm">2 phút đọc</span>
+                        <span className="text-sm">
+                            {Posts?.view_count} lượt xem
+                        </span>
                     </div>
                     <div className="order-1 sm:order-2 w-full sm:w-52 flex-shrink-0">
                         <img
                             className="object-cover rounded-xl w-full aspect-video"
-                            src={Posts?.banner}
+                            src={
+                                Posts?.image ||
+                                'https://yt3.ggpht.com/m3aEIKqYP-rYVvKgjqJObR6-UDgEcBj52re__8VZn38DfiFSu4U1-XyB9F3Lcj_FcT5xZYnaMA=s900-c-k-c0x00ffffff-no-rj'
+                            }
                             alt=""
                         />
                     </div>

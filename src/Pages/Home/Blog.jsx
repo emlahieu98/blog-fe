@@ -18,6 +18,7 @@ export default function Blog() {
             },
         }
     )
+
     useEffect(() => {
         const follow = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
@@ -36,7 +37,7 @@ export default function Blog() {
                     {isSuccess ? (
                         data?.pages.map((posts, index) => (
                             <div key={index}>
-                                {posts?.list.map((post, index) => (
+                                {posts.map((post, index) => (
                                     <Posts posts={post} key={post._id} />
                                 ))}
                             </div>
