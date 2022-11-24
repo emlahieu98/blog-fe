@@ -1,6 +1,6 @@
 import axios from 'axios'
 export const AxiosConfig = axios.create({
-    baseURL: 'http://149.102.141.242:4000/api/v1',
+    baseURL: 'https://emlahieu-api.xyz/api/v1',
     withCredentials: true,
     headers: {
         'Content-type': 'application/json',
