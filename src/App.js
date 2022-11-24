@@ -33,7 +33,7 @@ function App() {
             />
             <Routes>
                 <Route path="new-post" element={<CreatePostPage />} />
-                <Route path="@:username" element={<PersonalPage />} />
+                {/* <Route path="@:username" element={<PersonalPage />} /> */}
                 <Route path="blog/:slug" element={<PostsPage />} />
                 <Route path="auth" element={<AuthPage />}>
                     <Route path="login" element={<Login />} />

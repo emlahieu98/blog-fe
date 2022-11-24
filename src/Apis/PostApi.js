@@ -2,10 +2,7 @@ import { AxiosConfig } from './AxiosConfig'
 
 export const PostApi = {
     getAllPost: ({ pageParam = 1 }) => {
-        return AxiosConfig.get(
-            // `/posts/all?order=desc&limit=4&page=${pageParam}`
-            `/posts?page=${pageParam}&page_size=5`
-        )
+        return AxiosConfig.get(`/posts?page=${pageParam}&page_size=5`)
     },
     getPostsBySlug: (slug) => {
         return AxiosConfig.get(`/posts/${slug}`)
