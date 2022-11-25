@@ -26,15 +26,14 @@ export default function CreatePostPage() {
     const formData = useRef({
         title: '',
         content: '',
-        banner: '',
+        image: '',
         tags: [],
         descriptions: '',
-        heading: '',
     })
 
     const handlePreview = async (e) => {
         setPreview(URL.createObjectURL(e.target.files[0]))
-        formData.current.banner = e.target.files[0]
+        formData.current.image = e.target.files[0]
     }
 
     const handleEditorChange = ({ html, text }) => {
@@ -50,9 +49,9 @@ export default function CreatePostPage() {
     const submitForm = async () => {
         try {
             const body = new FormData()
-            body.append('image', formData.current.banner)
+            body.append('image', formData.current.image)
             const image = await UploadApi.single(body)
-            formData.current.banner = image.urlImage
+            formData.current.image = image.urlImage
             const result = await UserApi.addPost(formData.current)
             toast.success('Tạo mới bài viết thành công !')
             setTimeout(() => {
@@ -68,6 +67,10 @@ export default function CreatePostPage() {
                 const body = new FormData()
                 body.append('image', file)
                 const result = await UploadApi.single(body)
+                console.log(
+                    '🚀 ~ file: index.jsx ~ line 70 ~ returnnewPromise ~ result',
+                    result
+                )
                 resolve(result.urlImage)
             } catch (error) {
                 reject(error)
@@ -125,34 +128,37 @@ export default function CreatePostPage() {
                                 </p>
                             </div>
                         </label>
-                        <input
-                            onChange={(e) => {
-                                formData.current.heading = e.target.value
-                            }}
-                            className="block outline-none border-b-[1px] w-full text-xl py-3 font-semibold"
-                            type="text"
-                            placeholder="Tiêu đề khi tin được hiển thị"
-                        />
-                        <input
-                            className="block outline-none border-b-[1px] w-full py-3"
-                            onChange={(e) => {
-                                formData.current.descriptions = e.target.value
-                            }}
-                            type="text"
-                            placeholder="Mô tả khi tin được hiển thị"
-                        />
-                        <p className="mt-7 text-gray-400">
-                            <span className="text-gray-700">Lưu ý:</span> Chỉnh
-                            sửa tại đây sẽ thay đổi cách bài viết được hiển thị
-                            tại trang chủ, tin nổi bật - Chứ không ảnh hưởng đến
-                            nội dung bài viết của bạn.
-                        </p>
+                        <div>
+                            <p className="text-xl py-3 font-semibold ">
+                                Tiêu đề khi tin được hiển thị
+                            </p>
+                            <input
+                                className="block outline-none border-b-[1px] w-full py-3"
+                                disabled
+                                placeholder={formData.current.title}
+                            />
+                        </div>
+                        <div>
+                            <p className="text-xl py-3 font-semibold ">
+                                Slug bài viết
+                            </p>
+                            <input
+                                className="block outline-none border-b-[1px] w-full py-3"
+                                disabled
+                                placeholder={formData.current.title}
+                            />
+                        </div>
                     </div>
                     <div>
-                        <p className="pb-3">
-                            Thêm tối đa 5 thẻ để độc giả biết bài viết của bạn
-                            đang đề cập đến vấn đề gì.
-                        </p>
+                        <p className="pb-3">Thêm tags bài viết</p>
+                        <div>
+                            <CreatableSelect
+                                isMulti
+                                onChange={handleChange}
+                                options={options}
+                            />
+                        </div>
+                        <p className="pt-3 pb-3">Thêm category bài viết</p>
                         <div>
                             <CreatableSelect
                                 isMulti
@@ -164,7 +170,7 @@ export default function CreatePostPage() {
                             className="text-white rounded-lg bg-green-600 py-2 px-4 mt-7"
                             onClick={submitForm}
                         >
-                            Xuất bản ngay
+                            Đăng bài
                         </button>
                     </div>
                 </div>

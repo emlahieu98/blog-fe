@@ -1,7 +1,7 @@
-import { AxiosConfig } from './AxiosConfig';
+import { AxiosConfig } from './AxiosConfig'
 
 export const UploadApi = {
-  single: (body) => {
-    return AxiosConfig.post('/uploads/single', body);
-  },
-};
+    single: (body) => {
+        return AxiosConfig.post('/common/upload-file', body)
+    },
+}
