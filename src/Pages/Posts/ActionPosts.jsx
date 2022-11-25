@@ -22,8 +22,7 @@ export default function ActionPosts() {
                 <div className="pb-3 border-b-[1px]">
                     <h1 className="font-semibold pt-5 text-center">Idioms</h1>
                     <p className="text-sm text-gray-500">
-                        {Posts?.userId?.description ||
-                            `Study, learn more, learn forever`}
+                        {`Study, learn more, learn forever`}
                     </p>
                 </div>
             </div>

@@ -8,12 +8,14 @@ import { useLocation } from 'react-router-dom'
 export default function Blog() {
     const RefInView = useRef()
     const { data, fetchNextPage, hasNextPage, isSuccess } = useInfiniteQuery(
-        'posts_all',
+        ['posts'],
         PostApi.getAllPost,
         {
             getNextPageParam: (lastPage, pages) => {
-                if (lastPage.page * 4 < lastPage.total) {
-                    return lastPage.page + 1
+                if (pages.length < 2) {
+                    return pages.length + 1
+                } else {
+                    return undefined
                 }
             },
         }
