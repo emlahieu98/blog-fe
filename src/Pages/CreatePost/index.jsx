@@ -10,7 +10,7 @@ import { UploadApi } from 'Apis/UploadApi'
 import axios from 'axios'
 import { UserApi } from 'Apis/UserApi'
 import { useNavigate } from 'react-router-dom'
-
+import slug from 'slug'
 const mdParser = new MarkdownIt()
 
 const options = [
@@ -28,7 +28,8 @@ export default function CreatePostPage() {
         content: '',
         image: '',
         tags: [],
-        descriptions: '',
+        description: '',
+        user_name: '',
     })
 
     const handlePreview = async (e) => {
@@ -49,9 +50,10 @@ export default function CreatePostPage() {
     const submitForm = async () => {
         try {
             const body = new FormData()
-            body.append('image', formData.current.image)
+            body.append('file', formData.current.image)
             const image = await UploadApi.single(body)
-            formData.current.image = image.urlImage
+            formData.current.image = image.url
+            formData.current.slug = slug(formData.current.title)
             const result = await UserApi.addPost(formData.current)
             toast.success('Tạo mới bài viết thành công !')
             setTimeout(() => {
@@ -67,11 +69,7 @@ export default function CreatePostPage() {
                 const body = new FormData()
                 body.append('image', file)
                 const result = await UploadApi.single(body)
-                console.log(
-                    '🚀 ~ file: index.jsx ~ line 70 ~ returnnewPromise ~ result',
-                    result
-                )
-                resolve(result.urlImage)
+                resolve(result.url)
             } catch (error) {
                 reject(error)
             }
@@ -145,7 +143,7 @@ export default function CreatePostPage() {
                             <input
                                 className="block outline-none border-b-[1px] w-full py-3"
                                 disabled
-                                placeholder={formData.current.title}
+                                placeholder={slug(formData.current.title)}
                             />
                         </div>
                     </div>
@@ -164,6 +162,16 @@ export default function CreatePostPage() {
                                 isMulti
                                 onChange={handleChange}
                                 options={options}
+                            />
+                        </div>
+                        <p className="pt-3 pb-3">Thêm nick name bài viết</p>
+                        <div>
+                            <input
+                                type="input"
+                                onChange={(e) => {
+                                    formData.current.user_name = e.target.value
+                                }}
+                                className="block border-[1px] w-full py-2"
                             />
                         </div>
                         <button
