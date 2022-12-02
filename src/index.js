@@ -4,14 +4,16 @@ import App from './App'
 import './global.css'
 import ReactDOM from 'react-dom'
 import { QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from 'react-query/devtools'
 import client from 'QueryClient'
+import { Web3Provider } from './store/web3Store'
 
 ReactDOM.render(
     <>
         <QueryClientProvider client={client}>
             <BrowserRouter>
-                <App />
+                <Web3Provider>
+                    <App />
+                </Web3Provider>
             </BrowserRouter>
             {/* <ReactQueryDevtools initialIsOpen={true} /> */}
         </QueryClientProvider>

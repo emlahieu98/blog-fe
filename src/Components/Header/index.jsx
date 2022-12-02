@@ -1,34 +1,30 @@
 import { AuthApi } from 'Apis/AuthApi'
 import clsx from 'clsx'
 import Modal from 'Components/Modal'
-import NotificationModal from 'Components/Modal/NotificationModal'
-import UserModal from 'Components/Modal/UserModal'
 import { navLink } from 'Constants/NavLink'
 import React, { useState } from 'react'
 import { useQueryClient } from 'react-query'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-
+import { useWeb3Store } from '../../store/web3Store'
+import { BiWallet } from 'react-icons/bi'
+import {
+    FcPortraitMode,
+    FcLike,
+    FcEngineering,
+    FcCamera,
+    FcCloth,
+    FcDam,
+    FcCalculator,
+    FcDisplay,
+    FcDeleteDatabase,
+} from 'react-icons/fc'
 export default function Header() {
     const [isMenu, setMenu] = useState(false)
     const location = useLocation()
     const navigate = useNavigate()
-    const client = useQueryClient()
-    const current_user = client.getQueryData('current_user')
 
-    const logOut = async () => {
-        try {
-            await AuthApi.logout()
-            localStorage.removeItem('current_user')
-            localStorage.removeItem('access_token')
-            client.removeQueries('current_user')
-            setTimeout(() => {
-                navigate('/auth/login')
-            }, 1000)
-        } catch (error) {
-            toast.error(error)
-        }
-    }
+    const { connect, isConnected, walletAddress, disconnect } = useWeb3Store()
 
     return (
         <div className="fixed top-0 bg-white w-full z-40 ">
@@ -43,65 +39,23 @@ export default function Header() {
                     )}
                 >
                     <div>
-                        {!current_user ? (
-                            <>
-                                <NavLink
-                                    to="/auth/login"
-                                    className={({ isActive }) =>
-                                        isActive
-                                            ? 'py-4 my-1 px-4 flex gap-4 w-auto bg-[#e8ebed] rounded-l-lg items-center'
-                                            : 'py-4 my-1 px-4 flex gap-4 w-auto items-center'
-                                    }
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="h-5 w-5"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z"
-                                            clipRule="evenodd"
-                                        />
-                                    </svg>
-                                    <p className="capitalize text-xs font-semibold">
-                                        Connect wallet
-                                    </p>
-                                </NavLink>
-                            </>
-                        ) : (
-                            <>
-                                <img
-                                    src={current_user?.avatar}
-                                    alt=""
-                                    className="w-24 h-24 rounded-full"
-                                />
-                                <h1 className="py-3 text-lg font-semibold capitalize">
-                                    {current_user?.fullName}
-                                </h1>
-                                <NavLink
-                                    to="/auth/login"
-                                    className={({ isActive }) =>
-                                        isActive
-                                            ? 'py-4 my-1 px-4 flex gap-4 w-auto bg-[#e8ebed] rounded-l-lg items-center'
-                                            : 'py-4 my-1 px-4 flex gap-4 w-auto items-center'
-                                    }
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="h-5 w-5"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
-                                    </svg>
-                                    <p className="capitalize text-xs font-semibold">
-                                        Khóa học của tôi
-                                    </p>
-                                </NavLink>
-                            </>
-                        )}
+                        <>
+                            <div
+                                className={
+                                    'py-4 my-1 px-4 flex gap-4 w-auto items-center'
+                                }
+                            >
+                                <FcPortraitMode />
+                                <FcLike />
+                                <FcEngineering />
+                                <FcCamera />
+                                <FcDam />
+                                <FcCalculator />
+                                <FcDeleteDatabase />
+                                <FcCloth />
+                                <FcDisplay />
+                            </div>
+                        </>
                     </div>
                     <div className="border-y-[1px] py-3">
                         {navLink.map((val, index) => (
@@ -120,30 +74,6 @@ export default function Header() {
                                 </p>
                             </NavLink>
                         ))}
-                    </div>
-                    <div>
-                        {current_user && (
-                            <button
-                                className="flex gap-3 items-center py-3"
-                                onClick={logOut}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-5 w-5"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                >
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z"
-                                        clipRule="evenodd"
-                                    />
-                                </svg>
-                                <h2 className="text-xs font-semibold">
-                                    Đăng xuất
-                                </h2>
-                            </button>
-                        )}
                     </div>
                 </div>
             </Modal>
@@ -243,20 +173,36 @@ export default function Header() {
                             />
                         </svg>
                     </div>
-                    {!current_user ? (
-                        <Link to="/auth/login">
-                            <button className="px-4 py-2 rounded-full bg-orange-500 text-white">
-                                Connect wallet
-                            </button>
-                        </Link>
+                    {!isConnected ? (
+                        <button
+                            className="px-4 py-2 rounded-full bg-orange-500 text-white"
+                            onClick={connect}
+                        >
+                            Connect wallet
+                        </button>
                     ) : (
                         <>
-                            <div className="flex gap-6 items-center">
-                                <h2 className="text-gray-600 text-sm font-semibold hidden lg:block">
-                                    Khóa học của tôi
-                                </h2>
-                                <NotificationModal />
-                                <UserModal />
+                            <div className="flex gap-6">
+                                <div className="px-4 py-2 rounded-full bg-orange-500 text-white flex justify-between align-center ">
+                                    <span className="text-3xl pr-2">
+                                        <BiWallet />
+                                    </span>
+                                    <div className="pt-1">
+                                        {walletAddress
+                                            .substring(0, 4)
+                                            .concat('...') +
+                                            walletAddress.slice(-4)}
+                                    </div>
+                                    <div className="p-2">
+                                        <svg
+                                            class="fill-current h-4 w-4"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                        </svg>
+                                    </div>
+                                </div>
                             </div>
                         </>
                     )}
