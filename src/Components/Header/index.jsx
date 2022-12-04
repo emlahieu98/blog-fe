@@ -8,6 +8,7 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useWeb3Store } from '../../store/web3Store'
 import { BiWallet } from 'react-icons/bi'
+import UserModal from '../UserModal/UserModal'
 import {
     FcPortraitMode,
     FcLike,
@@ -182,28 +183,19 @@ export default function Header() {
                         </button>
                     ) : (
                         <>
+                            {/* <div className="flex gap-6"> */}
                             <div className="flex gap-6">
-                                <div className="px-4 py-2 rounded-full bg-orange-500 text-white flex justify-between align-center ">
-                                    <span className="text-3xl pr-2">
-                                        <BiWallet />
-                                    </span>
-                                    <div className="pt-1">
-                                        {walletAddress
-                                            .substring(0, 4)
-                                            .concat('...') +
-                                            walletAddress.slice(-4)}
-                                    </div>
-                                    <div className="p-2">
-                                        <svg
-                                            class="fill-current h-4 w-4"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20"
-                                        >
-                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                        </svg>
-                                    </div>
-                                </div>
+                                <UserModal />
+                                {/* <div>
+                                    <button
+                                        onClick={disconnect}
+                                        className=" bg-orange-500"
+                                    >
+                                        Disconnect
+                                    </button>
+                                </div> */}
                             </div>
+                            <div></div>
                         </>
                     )}
                 </section>

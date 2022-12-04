@@ -6,9 +6,8 @@ export default function Project() {
             <div className=" lg:px-8 xl:px-14 pt-7 pb-10">
                 <h1 className="text-3xl font-extrabold mb-3">Sản phẩm</h1>
                 <p className="max-w-[840px] text-gray-700 mb-6 lg:mb-14">
-                    Các sản phẩm đa dạng về Front end, Back end, Web3 chủ yếu để
-                    tìm hiểu thêm kiến thức là trau dồi các kĩ năng lập trình
-                    ...
+                    Các sản phẩm đa dạng về Front end, Back end, Web3,
+                    Blockchain...
                 </p>
                 <section className="flex gap-8 flex-wrap lg:grid gap-x-8 gap-y-4 grid-cols-3">
                     {listProjects.map((item, index) => (

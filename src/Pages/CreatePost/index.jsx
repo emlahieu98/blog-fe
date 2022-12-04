@@ -55,7 +55,7 @@ export default function CreatePostPage() {
             formData.current.image = image.url
             formData.current.slug = slug(formData.current.title)
             const result = await UserApi.addPost(formData.current)
-            toast.success('Tạo mới bài viết thành công !')
+            toast.success('Create new post success!')
             setTimeout(() => {
                 navigation('/')
             }, 1000)
@@ -109,9 +109,7 @@ export default function CreatePostPage() {
                         className="hidden"
                     />
                     <div>
-                        <h2 className="font-semibold text-lg pb-4">
-                            Xem trước
-                        </h2>
+                        <h2 className="font-semibold text-lg pb-4">Preview</h2>
                         <label htmlFor="upload_image">
                             <div
                                 className="bg-gray-100 px-10 pt-10 cursor-pointer bg-center bg-cover bg-no-repeat"
@@ -119,17 +117,15 @@ export default function CreatePostPage() {
                             >
                                 {/* <img src={preview} alt='' /> */}
                                 <p className="text-base text-center pb-5">
-                                    Thêm một ảnh đại diện .
+                                    Avatar Image
                                 </p>
                                 <p className="text-center text-orange-500 pb-20">
-                                    Bấm để chọn ảnh hiển thị
+                                    Choose your image
                                 </p>
                             </div>
                         </label>
                         <div>
-                            <p className="text-xl py-3 font-semibold ">
-                                Tiêu đề khi tin được hiển thị
-                            </p>
+                            <p className="text-xl py-3 font-semibold ">Title</p>
                             <input
                                 className="block outline-none border-b-[1px] w-full py-3"
                                 disabled
@@ -137,9 +133,7 @@ export default function CreatePostPage() {
                             />
                         </div>
                         <div>
-                            <p className="text-xl py-3 font-semibold ">
-                                Slug bài viết
-                            </p>
+                            <p className="text-xl py-3 font-semibold ">Slug</p>
                             <input
                                 className="block outline-none border-b-[1px] w-full py-3"
                                 disabled
@@ -148,7 +142,7 @@ export default function CreatePostPage() {
                         </div>
                     </div>
                     <div>
-                        <p className="pb-3">Thêm tags bài viết</p>
+                        <p className="pb-3">Tags</p>
                         <div>
                             <CreatableSelect
                                 isMulti
@@ -156,7 +150,7 @@ export default function CreatePostPage() {
                                 options={options}
                             />
                         </div>
-                        <p className="pt-3 pb-3">Thêm category bài viết</p>
+                        <p className="pt-3 pb-3">Category</p>
                         <div>
                             <CreatableSelect
                                 isMulti
@@ -164,7 +158,7 @@ export default function CreatePostPage() {
                                 options={options}
                             />
                         </div>
-                        <p className="pt-3 pb-3">Thêm nick name bài viết</p>
+                        <p className="pt-3 pb-3">Nick name owner</p>
                         <div>
                             <input
                                 type="input"
@@ -178,7 +172,7 @@ export default function CreatePostPage() {
                             className="text-white rounded-lg bg-green-600 py-2 px-4 mt-7"
                             onClick={submitForm}
                         >
-                            Đăng bài
+                            Create post
                         </button>
                     </div>
                 </div>
@@ -191,7 +185,7 @@ export default function CreatePostPage() {
                             setShow(true)
                         }}
                     >
-                        Xuất bản
+                        Publish
                     </button>
                 </div>
                 <input

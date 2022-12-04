@@ -114,22 +114,13 @@ export default function PostsPage() {
                         </div>
                         <div className="mt-7">
                             <h1 className="text-xl font-semibold pb-5">
-                                Bài viết nổi bật
+                                Featured Posts
                             </h1>
-                            <div className="border-b-[1px] pb-3">
-                                <div className="rounded-xl py-3">
-                                    <img
-                                        className="rounded-xl w-full aspect-[3/1] sm:aspect-[4/1] object-cover"
-                                        src="http://res.cloudinary.com/tuyndev/image/upload/v1654592594/images/ifhtjpaql7llxb8xa8dj.png"
-                                        alt=""
-                                    />
-                                </div>
-                            </div>
                         </div>
                         <div className="pt-5">
-                            <h2 className="capitalize font-medium text-sm text-gray-500">
-                                CÁC THẺ ĐƯỢC ĐỀ XUẤT
-                            </h2>
+                            <h1 className="text-xl font-semibold pb-5">
+                                Recommended tags
+                            </h1>
                             <div className="flex gap-x-3 gap-y-2 p-3 flex-wrap">
                                 {/* {Posts?.tags.map((tag, index) => (
                                     <p
