@@ -22,8 +22,6 @@ const Marketplace = () => {
                 <Card />
                 <Card />
                 <Card />
-                <Card />
-                <Card />
             </div>
             <ReactPaginate
                 breakLabel="..."

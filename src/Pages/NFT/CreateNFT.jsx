@@ -3,47 +3,38 @@ import 'react-markdown-editor-lite/lib/index.css'
 import clsx from 'clsx'
 import { toast } from 'react-toastify'
 import { UploadApi } from 'Apis/UploadApi'
-import axios from 'axios'
+import { useWeb3Store } from '../../store/web3Store'
 import { UserApi } from 'Apis/UserApi'
 import { useNavigate } from 'react-router-dom'
-import slug from 'slug'
 import MainLayout from 'Layouts/HomeLayout'
 
 export default function CreateNFTPage() {
+    const { walletAddress } = useWeb3Store()
+
     const navigation = useNavigate()
     const [preview, setPreview] = useState()
     const formData = useRef({
-        title: '',
-        content: '',
-        image: '',
-        tags: [],
+        name: '',
+        external_link: '',
+        image_url: '',
         description: '',
-        user_name: '',
+        attributes: [],
     })
 
     const handlePreview = async (e) => {
         setPreview(URL.createObjectURL(e.target.files[0]))
-        formData.current.image = e.target.files[0]
+        formData.current.image_url = e.target.files[0]
     }
 
-    const handleEditorChange = ({ html, text }) => {
-        console.log(text)
-        formData.current.content = text
-    }
-
-    const handleChange = (newValue, actionMeta) => {
-        formData.current.tags = newValue.map((val) => {
-            return { label: val.label }
-        })
-    }
     const submitForm = async () => {
         try {
             const body = new FormData()
-            body.append('file', formData.current.image)
-            const image = await UploadApi.single(body)
-            formData.current.image = image.url
-            formData.current.slug = slug(formData.current.title)
-            const result = await UserApi.addPost(formData.current)
+            body.append('file', formData.current.image_url)
+            const image = await UploadApi.singlePinataService(body)
+            const image_url = `https://gateway.pinata.cloud/ipfs/${image.data.IpfsHash}`
+            formData.current.image_url = image_url
+            formData.current.wallet_address = walletAddress
+            const result = await UserApi.createNFT(formData.current)
             toast.success('Create new NFT success !')
             setTimeout(() => {
                 navigation('/')
@@ -51,18 +42,6 @@ export default function CreateNFTPage() {
         } catch (error) {
             toast.error(error)
         }
-    }
-    const onImageUpload = async (file) => {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const body = new FormData()
-                body.append('image', file)
-                const result = await UploadApi.single(body)
-                resolve(result.url)
-            } catch (error) {
-                reject(error)
-            }
-        })
     }
 
     return (
@@ -86,7 +65,6 @@ export default function CreateNFTPage() {
                                 className="bg-gray-100 px-10 pt-10 cursor-pointer bg-center bg-cover bg-no-repeat"
                                 style={{ backgroundImage: `url(${preview})` }}
                             >
-                                {/* <img src={preview} alt='' /> */}
                                 <p className="text-base text-center pb-5">
                                     Image{' '}
                                     <span className="text-red-500">*</span>
@@ -104,8 +82,7 @@ export default function CreateNFTPage() {
                                 <input
                                     type="input"
                                     onChange={(e) => {
-                                        formData.current.user_name =
-                                            e.target.value
+                                        formData.current.name = e.target.value
                                     }}
                                     placeholder="Item name"
                                     className="block border-[1px] w-full p-2 "
@@ -119,7 +96,8 @@ export default function CreateNFTPage() {
                             <input
                                 type="input"
                                 onChange={(e) => {
-                                    formData.current.user_name = e.target.value
+                                    formData.current.external_link =
+                                        e.target.value
                                 }}
                                 className="block border-[1px] w-full p-2"
                             />
@@ -129,7 +107,8 @@ export default function CreateNFTPage() {
                             <input
                                 type="input"
                                 onChange={(e) => {
-                                    formData.current.user_name = e.target.value
+                                    formData.current.description =
+                                        e.target.value
                                 }}
                                 className="block border-[1px] w-full p-2"
                             />

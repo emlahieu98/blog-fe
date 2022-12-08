@@ -183,17 +183,8 @@ export default function Header() {
                         </button>
                     ) : (
                         <>
-                            {/* <div className="flex gap-6"> */}
                             <div className="flex gap-6">
                                 <UserModal />
-                                {/* <div>
-                                    <button
-                                        onClick={disconnect}
-                                        className=" bg-orange-500"
-                                    >
-                                        Disconnect
-                                    </button>
-                                </div> */}
                             </div>
                             <div></div>
                         </>
