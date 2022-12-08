@@ -7,6 +7,7 @@ import {
     NFT_MARKETPLACE_ADDRESS,
 } from '../config'
 import { useEffect } from 'react'
+import { toast } from 'react-toastify'
 
 export const CHAIN_ID = '0x61'
 
@@ -21,6 +22,7 @@ export const useWeb3Store = create((set, get) => ({
     setMarketplaceContract: () => {},
     connect: async () => {
         if (!window.ethereum) {
+            toast.error('Please install Metamask')
             return
         }
         const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -36,6 +38,7 @@ export const useWeb3Store = create((set, get) => ({
     },
     init: async () => {
         if (!window.ethereum) {
+            toast.error('Please install Metamask')
             return
         }
 
