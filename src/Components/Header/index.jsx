@@ -3,11 +3,8 @@ import clsx from 'clsx'
 import Modal from 'Components/Modal'
 import { navLink } from 'Constants/NavLink'
 import React, { useState } from 'react'
-import { useQueryClient } from 'react-query'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
 import { useWeb3Store } from '../../store/web3Store'
-import { BiWallet } from 'react-icons/bi'
 import UserModal from '../UserModal/UserModal'
 import {
     FcPortraitMode,
@@ -25,7 +22,7 @@ export default function Header() {
     const location = useLocation()
     const navigate = useNavigate()
 
-    const { connect, isConnected, walletAddress, disconnect } = useWeb3Store()
+    const { connect, isConnected } = useWeb3Store()
 
     return (
         <div className="fixed top-0 bg-white w-full z-40 ">
