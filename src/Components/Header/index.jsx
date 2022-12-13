@@ -126,7 +126,7 @@ export default function Header() {
                                     navigate(-1)
                                 }}
                             >
-                                Quay Lại
+                                Go back
                             </p>
                         </div>
                     ) : (
@@ -153,7 +153,7 @@ export default function Header() {
                     <input
                         className="w-full outline-0 border-0 rounded-r-[inherit] text-sm"
                         type="text"
-                        placeholder="Tìm kiếm mọi thứ..."
+                        placeholder="Searching everything..."
                     />
                 </section>
                 <section className="flex gap-5 items-center">

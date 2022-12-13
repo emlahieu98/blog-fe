@@ -4,7 +4,7 @@ export default function Project() {
     return (
         <>
             <div className=" lg:px-8 xl:px-14 pt-7 pb-10">
-                <h1 className="text-3xl font-extrabold mb-3">Sản phẩm</h1>
+                <h1 className="text-3xl font-extrabold mb-3"> Products</h1>
                 <p className="max-w-[840px] text-gray-700 mb-6 lg:mb-14">
                     Các sản phẩm đa dạng về Front end, Back end, Web3,
                     Blockchain...

@@ -194,7 +194,7 @@ export default function CreatePostPage() {
                         formData.current.title = e.target.value
                     }}
                     className="w-full text-2xl font-medium p-7 outline-0"
-                    placeholder="Tiêu đề"
+                    placeholder="Title"
                 />
                 <section className="tuyn-editor px-2 lg:px-6">
                     <MdEditor
@@ -207,7 +207,7 @@ export default function CreatePostPage() {
                         onChange={handleEditorChange}
                         onImageUpload={onImageUpload}
                         imageAccept=".jpg,.png"
-                        placeholder="Viết điều gì mà bạn thích..."
+                        placeholder="Writing here..."
                     />
                 </section>
             </section>

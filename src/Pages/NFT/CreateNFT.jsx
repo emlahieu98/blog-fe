@@ -18,7 +18,7 @@ import Loading from '../../Components/Loading/Loading'
 const schema = yup.object({
     image_url: yup.mixed().required('Please upload image'),
     name: yup.string().required('Name must be filled out'),
-    external_link: yup.string().required('External link must be filled out'),
+    external_link: yup.string(),
     description: yup.string().required('Description must be filled out'),
 })
 export default function CreateNFTPage() {

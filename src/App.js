@@ -1,5 +1,3 @@
-// import Login from 'Components/Auth/Login'
-// import AuthPage from 'Pages/Auth'
 import HomePage from 'Pages/Home'
 import Blog from 'Pages/Home/Blog'
 import LearningPage from 'Pages/Home/Learning'
@@ -15,6 +13,7 @@ import CreateNFTPage from 'Pages/NFT/CreateNFT'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import ToastTuyn from 'Components/Toast/ToastTuyn'
+import PersonalPage from 'Pages/Personal'
 
 function App() {
     return (
@@ -34,10 +33,8 @@ function App() {
             <Routes>
                 <Route path="new-post" element={<CreatePostPage />} />
                 <Route path="new-nft" element={<CreateNFTPage />} />
-                {/* <Route path="@:username" element={<PersonalPage />} /> */}
-                <Route path="blog/:slug" element={<PostsPage />} />
-                {/* </Route> */}
-                {/* <Route path="blog/:slug" element={<PostsPage />} /> */}
+                <Route path="@:username" element={<PersonalPage />} />
+                <Route path="blog/:slug" element={<PostsPage />} />x{' '}
                 <Route path="/" element={<HomePage />}>
                     <Route path="" element={<Main />} />
                     <Route path="marketplace" element={<MarketplacePage />} />

@@ -104,7 +104,7 @@ export default function UserModal() {
                             </h2>
                         </div>
                     </div>
-                    <Link to={`/`}>
+                    <Link to={`/@${walletAddress}`}>
                         <h3 className="cursor-pointer text-[14px] p-2 text-gray-700">
                             My profile
                         </h3>
