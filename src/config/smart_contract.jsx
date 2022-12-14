@@ -8,11 +8,9 @@ const getGasPrice = async () => {
     return (await BSC_provider.getGasPrice()) * 5
 }
 
-const optionsTx = async () => {
+export const optionsTx = async () => {
     return {
         gasPrice: await getGasPrice(),
         gasLimit: 300000,
     }
 }
-
-module.exports = { optionsTx }
