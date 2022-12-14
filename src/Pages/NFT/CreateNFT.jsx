@@ -60,13 +60,12 @@ export default function CreateNFTPage() {
                     value: stars,
                 },
             ]
-            console.log('🚀 ~ file: CreateNFT.jsx:39 ~ submitForm ~ data', data)
             await UserApi.createNFT(data)
             setIsLoading(false)
-            toast.success('Create new NFT success !')
             setTimeout(() => {
-                navigation('/')
+                navigation(`/@${walletAddress}`)
             }, 1000)
+            toast.success('Create new NFT success !')
         } catch (error) {
             toast.error(error)
         }
@@ -82,7 +81,7 @@ export default function CreateNFTPage() {
                     className="w-full flex flex-col items-center justify-center h-full"
                 >
                     {isLoading ? (
-                        <Loading type="spin" color="#333" />
+                        <Loading />
                     ) : (
                         <div className="container w-full h-full place-content-center mx-auto grid  sm:grid-cols-2 sm:gap-10 lg:gap-20 px-5 lg:px-10">
                             <input

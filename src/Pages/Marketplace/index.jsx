@@ -1,10 +1,59 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Card from '../../Components/Card/Card'
 import ReactPaginate from 'react-paginate'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { useWeb3Store } from '../../store/web3Store'
+import Loading from '../../Components/Loading/Loading'
+import { ethers } from 'ethers'
 
 const Marketplace = () => {
+    const { marketplaceContract, nftContract } = useWeb3Store()
     const handlePageClick = () => {}
+    const [nfts, setNfts] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
+    useEffect(() => {
+        loadNFTs()
+    }, [])
+
+    async function loadNFTs() {
+        // setIsLoading(true)
+        // Get all listed NFTs
+        const listings = await marketplaceContract.getListedNfts()
+        console.log('🚀 ~ file: index.jsx:23 ~ loadNFTs ~ listings', listings)
+        // // Iterate over the listed NFTs and retrieve their metadata
+        const nfts = await Promise.all(
+            listings.map(async (i) => {
+                try {
+                    const tokenURI = await nftContract.tokenURI(
+                        ethers.utils.formatUnits(i.tokenId, 0)
+                    )
+                    const meta = await axios.get(tokenURI)
+
+                    const nft = {
+                        price: ethers.utils.formatEther(i.price) || 0,
+                        tokenId: ethers.utils.formatUnits(i.tokenId, 0) || 999,
+                        seller: i.seller,
+                        owner: i.buyer,
+                        image_url:
+                            meta.data.image_url ||
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw0zKknEf_ExsMDMYCkGnkF4bvK-dRrBJb9FdYBJOO0vy5H15IsJSpMBSlVDz7bt6BKCk&usqp=CAU',
+                        name: meta.data.name || '',
+                        description: meta.data.description || '',
+                        level: meta.data.attributes[0].value || 1,
+                        stars: meta.data.attributes[1].value || 1,
+                    }
+
+                    return nft
+                } catch (err) {
+                    console.log(err)
+                    return null
+                }
+            })
+        )
+        setNfts(nfts.filter((nft) => nft !== null))
+        // setIsLoading(false)
+    }
 
     return (
         <div>
@@ -16,12 +65,25 @@ const Marketplace = () => {
                 </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
+                {isLoading ? (
+                    <Loading />
+                ) : (
+                    <>
+                        {!nfts.length > 0 ? (
+                            <>
+                                <p className="text-center text-orange-500 animate-bounce py-4">
+                                    No more results to show ^_^
+                                </p>
+                            </>
+                        ) : (
+                            nfts.map((nft) => (
+                                <>
+                                    <Card nft={nft} />
+                                </>
+                            ))
+                        )}
+                    </>
+                )}
             </div>
             <ReactPaginate
                 breakLabel="..."

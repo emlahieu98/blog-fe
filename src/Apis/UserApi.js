@@ -13,9 +13,9 @@ export const UserApi = {
     createNFT: (body) => {
         return AxiosConfig.post('/blockchain/create-nft', body)
     },
-    getAllNFT: (wallet_address) => {
+    getAllNFT: (wallet_address, pageParam = 1) => {
         return AxiosConfig.get(
-            `/blockchain/list-nfts?wallet_address=${wallet_address}`
+            `/blockchain/list-nfts?wallet_address=${wallet_address}&page=${pageParam}`
         )
     },
 }

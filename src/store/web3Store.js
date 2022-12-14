@@ -17,6 +17,7 @@ export const useWeb3Store = create((set, get) => ({
     nftContract: null,
     marketplaceContract: null,
     walletAddress: null,
+    signer: null,
     setIsConnected: (isConnected) => set({ isConnected }),
     setNftContract: () => {},
     setMarketplaceContract: () => {},
@@ -30,8 +31,18 @@ export const useWeb3Store = create((set, get) => ({
         await provider.send('eth_requestAccounts', [])
 
         const signer = provider.getSigner()
+        console.log('🚀 ~ file: web3Store.js:34 ~ connect: ~ signer', signer)
 
-        set({ isConnected: true, walletAddress: await signer.getAddress() })
+        set({
+            isConnected: true,
+            walletAddress: await signer.getAddress(),
+            nftContract: new ethers.Contract(NFT_ADDRESS, NFT_ABI, signer),
+            marketplaceContract: new ethers.Contract(
+                NFT_MARKETPLACE_ADDRESS,
+                NFT_MARKETPLACE_ABI,
+                signer
+            ),
+        })
     },
     disconnect: () => {
         return set({ isConnected: false })
@@ -77,8 +88,8 @@ export const useWeb3Store = create((set, get) => ({
 }))
 
 export const Web3Provider = ({ children }) => {
-    const init = useWeb3Store((state) => state.init)
-    const { nftContract, marketplaceContract } = useWeb3Store()
+    const init = useWeb3Store((state) => state.connect)
+
     useEffect(() => {
         if (!window.ethereum) {
             return
