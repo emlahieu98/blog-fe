@@ -4,9 +4,12 @@ import { AiFillStar } from 'react-icons/ai'
 import { useWeb3Store } from '../../store/web3Store'
 import { optionsTx } from '../../config/smart_contract'
 import { ethers } from 'ethers'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 const MyCard = ({ nft }) => {
-    console.log('🚀 ~ file: MyCard.jsx:7 ~ MyCard ~ nft', nft)
+    const navigate = useNavigate()
+
     const buttonText = {
         sell: 'Sell',
         approve: 'Approve',
@@ -31,16 +34,21 @@ const MyCard = ({ nft }) => {
             const gasLimit = await marketplaceContract.estimateGas.listNft(
                 nft.token_address,
                 nft.token_id,
-                ethers.utils.parseEther('0.01'),
-                { value: ethers.utils.parseEther('0.0001') }
+                ethers.utils.parseEther('0.01')
             )
             const txn = await marketplaceContract.listNft(
                 nft.token_address,
                 nft.token_id,
-                ethers.utils.parseEther('0.01'),
-                { gasLimit, value: ethers.utils.parseEther('0.0001') }
+                ethers.utils.parseEther('0.01')
             )
-            await txn.wait()
+            const txnReceipt = await txn.wait()
+
+            if (txnReceipt.status) {
+                toast.success('Selling NFT on the market successfully')
+                setTimeout(() => {
+                    navigate('/marketplace')
+                }, 1000)
+            }
         }
         if (e.target.innerText === buttonText.approve) {
             const gasLimit = await nftContract.estimateGas.approve(
@@ -53,7 +61,12 @@ const MyCard = ({ nft }) => {
                 nft.token_id,
                 { gasLimit }
             )
-            await txn.wait()
+            const txnReceipt = await txn.wait()
+
+            if (txnReceipt.status) {
+                toast.success('Approve NFT on the market successfully')
+                window.reload()
+            }
         }
     }
 

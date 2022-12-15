@@ -88,7 +88,7 @@ export default function PersonalPage() {
                                     </p>
                                 </>
                             ) : (
-                                data?.pages.map((items, index) => (
+                                data.pages.map((items, index) => (
                                     <div
                                         key={index}
                                         className="md:grid md:grid-cols-2 bg-gray-100 gap-2 p-2"

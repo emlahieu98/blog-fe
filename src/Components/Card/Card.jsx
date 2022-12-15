@@ -3,23 +3,59 @@ import { AiFillStar } from 'react-icons/ai'
 import { IoMdStats } from 'react-icons/io'
 import { useWeb3Store } from '../../store/web3Store'
 import { ethers } from 'ethers'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+
+const buttonText = {
+    buy: 'Buy',
+    cancel: 'Cancel',
+}
 
 const Card = ({ nft }) => {
     const { walletAddress, marketplaceContract, nftContract } = useWeb3Store()
-    const handleBuyNFT = async (nft) => {
+    const navigate = useNavigate()
+    const handleBuyNFT = async (e, nft) => {
         // e.preventDefault()
-        const gasLimit = await marketplaceContract.estimateGas.buyNft(
-            nftContract.address,
-            nft.tokenId,
-            { value: ethers.utils.parseEther(nft.price) }
-        )
-        console.log(1)
-        const txn = await marketplaceContract.buyNft(
-            nftContract.address,
-            nft.tokenId,
-            { gasLimit, value: ethers.utils.parseEther(nft.price) }
-        )
-        await txn.wait()
+        if (e.target.innerText === buttonText.buy) {
+            const gasLimit = await marketplaceContract.estimateGas.buyNft(
+                nftContract.address,
+                nft.tokenId,
+                { value: ethers.utils.parseEther(nft.price) }
+            )
+            const txn = await marketplaceContract.buyNft(
+                nftContract.address,
+                nft.tokenId,
+                { gasLimit, value: ethers.utils.parseEther(nft.price) }
+            )
+            const txnReceipt = await txn.wait()
+
+            if (txnReceipt.status) {
+                toast.success('Buying NFT on the market successfully')
+                setTimeout(() => {
+                    navigate(`/@${walletAddress}`)
+                }, 1000)
+            }
+        }
+        if (e.target.innerText === buttonText.cancel) {
+            const gasLimit = await marketplaceContract.estimateGas.delistNft(
+                nftContract.address,
+                nft.tokenId,
+                { value: ethers.utils.parseEther('0.0001') }
+            )
+            const txn = await marketplaceContract.delistNft(
+                nftContract.address,
+                nft.tokenId,
+                { gasLimit, value: ethers.utils.parseEther('0.0001') }
+            )
+            const txnReceipt = await txn.wait()
+
+            if (txnReceipt.status) {
+                toast.success('Delist NFT on the market successfully')
+                setTimeout(() => {
+                    navigate(`/@${walletAddress}`)
+                }, 1000)
+            }
+        }
     }
 
     return (
@@ -67,18 +103,16 @@ const Card = ({ nft }) => {
                                     />
                                 </span>
                             </div>
-                            {walletAddress === nft.seller ? (
-                                <></>
-                            ) : (
-                                <>
-                                    <button
-                                        className="px-4 py-2 rounded-full bg-orange-500 text-white"
-                                        onClick={() => handleBuyNFT(nft)}
-                                    >
-                                        Buy
-                                    </button>
-                                </>
-                            )}
+                            <>
+                                <button
+                                    className="px-4 py-2 rounded-full bg-orange-500 text-white"
+                                    onClick={(e) => handleBuyNFT(e, nft)}
+                                >
+                                    {walletAddress === nft.seller
+                                        ? buttonText.cancel
+                                        : buttonText.buy}
+                                </button>
+                            </>
                         </div>
                     </div>
                 </div>
