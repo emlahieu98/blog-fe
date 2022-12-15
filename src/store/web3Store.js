@@ -22,6 +22,7 @@ export const useWeb3Store = create((set, get) => ({
     setNftContract: () => {},
     setMarketplaceContract: () => {},
     connect: async () => {
+        console.log('connect')
         if (!window.ethereum) {
             toast.error('Please install Metamask')
             return
@@ -31,7 +32,6 @@ export const useWeb3Store = create((set, get) => ({
         await provider.send('eth_requestAccounts', [])
 
         const signer = provider.getSigner()
-        console.log('🚀 ~ file: web3Store.js:34 ~ connect: ~ signer', signer)
 
         set({
             isConnected: true,
@@ -75,13 +75,16 @@ export const useWeb3Store = create((set, get) => ({
         //@ts-ignore
         ethereum.on('chainChanged', () => window.location.reload())
 
+        const nftContract = new ethers.Contract(NFT_ADDRESS, NFT_ABI, providers)
+        const marketplaceContract = new ethers.Contract(
+            NFT_MARKETPLACE_ADDRESS,
+            NFT_MARKETPLACE_ABI,
+            providers
+        )
+
         return set({
-            nftContract: new ethers.Contract(NFT_ADDRESS, NFT_ABI, providers),
-            marketplaceContract: new ethers.Contract(
-                NFT_MARKETPLACE_ADDRESS,
-                NFT_MARKETPLACE_ABI,
-                providers
-            ),
+            nftContract,
+            marketplaceContract,
             isInit: true,
         })
     },

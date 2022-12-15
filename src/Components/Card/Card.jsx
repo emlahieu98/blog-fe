@@ -1,8 +1,27 @@
 import React from 'react'
 import { AiFillStar } from 'react-icons/ai'
-import { IoMdStats, IoLogoBitcoin } from 'react-icons/io'
+import { IoMdStats } from 'react-icons/io'
+import { useWeb3Store } from '../../store/web3Store'
+import { ethers } from 'ethers'
+
 const Card = ({ nft }) => {
-    console.log('🚀 ~ file: Card.jsx:5 ~ Card ~ props', nft)
+    const { walletAddress, marketplaceContract, nftContract } = useWeb3Store()
+    const handleBuyNFT = async (nft) => {
+        // e.preventDefault()
+        const gasLimit = await marketplaceContract.estimateGas.buyNft(
+            nftContract.address,
+            nft.tokenId,
+            { value: ethers.utils.parseEther(nft.price) }
+        )
+        console.log(1)
+        const txn = await marketplaceContract.buyNft(
+            nftContract.address,
+            nft.tokenId,
+            { gasLimit, value: ethers.utils.parseEther(nft.price) }
+        )
+        await txn.wait()
+    }
+
     return (
         <>
             <section className="rounded-md shadow-md border transform transition duration-300 hover:-translate-y-1">
@@ -42,12 +61,24 @@ const Card = ({ nft }) => {
                                     {nft.price}
                                 </span>
                                 <span>
-                                    <IoLogoBitcoin />
+                                    <img
+                                        className="rounded-xl h-5 w-5"
+                                        src="https://icons.iconarchive.com/icons/cjdowner/cryptocurrency-flat/1024/Binance-Coin-BNB-icon.png"
+                                    />
                                 </span>
                             </div>
-                            <button className="px-4 py-2 rounded-full bg-orange-500 text-white">
-                                Buy
-                            </button>
+                            {walletAddress === nft.seller ? (
+                                <></>
+                            ) : (
+                                <>
+                                    <button
+                                        className="px-4 py-2 rounded-full bg-orange-500 text-white"
+                                        onClick={() => handleBuyNFT(nft)}
+                                    >
+                                        Buy
+                                    </button>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

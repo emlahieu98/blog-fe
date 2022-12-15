@@ -3,25 +3,23 @@ import { IoMdStats } from 'react-icons/io'
 import { AiFillStar } from 'react-icons/ai'
 import { useWeb3Store } from '../../store/web3Store'
 import { optionsTx } from '../../config/smart_contract'
+import { ethers } from 'ethers'
+
 const MyCard = ({ nft }) => {
     console.log('🚀 ~ file: MyCard.jsx:7 ~ MyCard ~ nft', nft)
     const buttonText = {
         sell: 'Sell',
         approve: 'Approve',
     }
-    const { nftContract, walletAddress, marketplaceContract } = useWeb3Store()
+    const { nftContract, marketplaceContract } = useWeb3Store()
     const [isApprovedForAll, setIsApprovedForAll] = useState(false)
     useEffect(() => {
         checkIsApprovedForAll()
-    }, [nft.token_id])
+    }, [])
 
     async function checkIsApprovedForAll() {
-        console.log(1, nft.token_id)
         const isApproved = await nftContract.getApproved(nft.token_id)
-        console.log(
-            '🚀 ~ file: MyCard.jsx:23 ~ checkIsApprovedForAll ~ nftContract',
-            isApproved
-        )
+
         isApproved === marketplaceContract.address
             ? setIsApprovedForAll(true)
             : setIsApprovedForAll(false)
@@ -29,15 +27,25 @@ const MyCard = ({ nft }) => {
 
     const handleSubmit = async (e, nft) => {
         // e.preventDefault()
-        console.log('e', nft.token_id)
         if (e.target.innerText === buttonText.sell) {
+            const gasLimit = await marketplaceContract.estimateGas.listNft(
+                nft.token_address,
+                nft.token_id,
+                ethers.utils.parseEther('0.01'),
+                { value: ethers.utils.parseEther('0.0001') }
+            )
+            const txn = await marketplaceContract.listNft(
+                nft.token_address,
+                nft.token_id,
+                ethers.utils.parseEther('0.01'),
+                { gasLimit, value: ethers.utils.parseEther('0.0001') }
+            )
+            await txn.wait()
         }
         if (e.target.innerText === buttonText.approve) {
-            const config = await optionsTx()
             const gasLimit = await nftContract.estimateGas.approve(
                 marketplaceContract.address,
-                nft.token_id,
-                config
+                nft.token_id
             )
 
             const txn = await nftContract.approve(
