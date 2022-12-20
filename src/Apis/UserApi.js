@@ -18,4 +18,7 @@ export const UserApi = {
             `/blockchain/list-nfts?wallet_address=${wallet_address}&page=${pageParam}`
         )
     },
+    getMetadataNFT: (body) => {
+        return AxiosConfig.post('/blockchain/get-metadata-nfts', body)
+    },
 }

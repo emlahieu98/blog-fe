@@ -6,6 +6,7 @@ import axios from 'axios'
 import { useWeb3Store } from '../../store/web3Store'
 import Loading from '../../Components/Loading/Loading'
 import { ethers } from 'ethers'
+import { UserApi } from 'Apis/UserApi'
 
 const Marketplace = () => {
     const handlePageClick = () => {}
@@ -30,7 +31,10 @@ const Marketplace = () => {
                             const tokenURI = await nftContract.tokenURI(
                                 ethers.utils.formatUnits(i.tokenId, 0)
                             )
-                            const meta = await axios.get(tokenURI)
+
+                            const meta = await UserApi.getMetadataNFT({
+                                url: tokenURI,
+                            })
 
                             const nft = {
                                 price: ethers.utils.formatEther(i.price) || 0,
@@ -40,12 +44,12 @@ const Marketplace = () => {
                                 seller: i.seller,
                                 owner: i.buyer,
                                 image_url:
-                                    meta.data.image_url ||
+                                    meta?.image_url ||
                                     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw0zKknEf_ExsMDMYCkGnkF4bvK-dRrBJb9FdYBJOO0vy5H15IsJSpMBSlVDz7bt6BKCk&usqp=CAU',
-                                name: meta.data.name || '',
-                                description: meta.data.description || '',
-                                level: meta.data.attributes[0].value || 1,
-                                stars: meta.data.attributes[1].value || 1,
+                                name: meta?.name || '',
+                                description: meta?.description || '',
+                                level: meta?.attributes[0].value || 1,
+                                stars: meta?.attributes[1].value || 1,
                             }
                             return nft
                         } catch (err) {
