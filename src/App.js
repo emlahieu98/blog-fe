@@ -33,7 +33,7 @@ function App() {
             <Routes>
                 <Route path="new-post" element={<CreatePostPage />} />
                 <Route path="new-nft" element={<CreateNFTPage />} />
-                <Route path="@:username" element={<PersonalPage />} />
+                <Route path="/me/:username" element={<PersonalPage />} />
                 <Route path="blog/:slug" element={<PostsPage />} />x{' '}
                 <Route path="/" element={<HomePage />}>
                     <Route path="" element={<Main />} />

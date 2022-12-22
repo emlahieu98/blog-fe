@@ -4,13 +4,12 @@ import MainLayout from 'Layouts/HomeLayout'
 import { useInfiniteQuery } from 'react-query'
 import { UserApi } from 'Apis/UserApi'
 import NFTSkeleton from 'Components/Skeleton/NFTSkeleton'
-import { AiFillStar } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import { IoMdStats } from 'react-icons/io'
 import MyCard from '../../Components/Card/MyCard'
 export default function PersonalPage() {
     const RefInView = useRef()
     const { username } = useParams()
+    console.log('🚀 ~ file: index.jsx:14 ~ PersonalPage ~ username', username)
     const { data, fetchNextPage, hasNextPage, isSuccess } = useInfiniteQuery(
         ['nfts'],
         () => UserApi.getAllNFT(username),
@@ -24,14 +23,6 @@ export default function PersonalPage() {
             },
         }
     )
-    // useEffect(() => {
-    //     const follow = new IntersectionObserver((entries) => {
-    //         if (entries[0].isIntersecting) {
-    //             fetchNextPage()
-    //         }
-    //     })
-    //     follow.observe(RefInView.current)
-    // }, [])
 
     return (
         <MainLayout>
