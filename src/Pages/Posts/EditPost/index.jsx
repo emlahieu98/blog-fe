@@ -1,5 +1,5 @@
 import DefaultLayout from 'Layouts/DefaultLayout'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import MarkdownIt from 'markdown-it'
 import MdEditor from 'react-markdown-editor-lite'
 import 'react-markdown-editor-lite/lib/index.css'
@@ -8,14 +8,12 @@ import * as yup from 'yup'
 import CreatableSelect from 'react-select/creatable'
 import { toast } from 'react-toastify'
 import { UploadApi } from 'Apis/UploadApi'
-import axios from 'axios'
 import { PostApi } from 'Apis/PostApi'
 import { useNavigate } from 'react-router-dom'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
-import { createLanguageService } from 'typescript'
 const mdParser = new MarkdownIt()
 
 const schema = yup.object({
