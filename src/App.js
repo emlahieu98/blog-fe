@@ -8,7 +8,8 @@ import NotFound from 'Pages/NotFound'
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import PostsPage from 'Pages/Posts'
-import CreatePostPage from 'Pages/CreatePost'
+import CreatePostPage from 'Pages/Posts/CreatePost'
+import EditPostPage from 'Pages/Posts/EditPost'
 import CreateNFTPage from 'Pages/NFT/CreateNFT'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -34,7 +35,8 @@ function App() {
                 <Route path="new-post" element={<CreatePostPage />} />
                 <Route path="new-nft" element={<CreateNFTPage />} />
                 <Route path="/me/:username" element={<PersonalPage />} />
-                <Route path="blog/:slug" element={<PostsPage />} />x{' '}
+                <Route path="blog/:slug" element={<PostsPage />} />
+                <Route path="edit/:slug" element={<EditPostPage />} />
                 <Route path="/" element={<HomePage />}>
                     <Route path="" element={<Main />} />
                     <Route path="marketplace" element={<MarketplacePage />} />

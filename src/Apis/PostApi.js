@@ -7,6 +7,9 @@ export const PostApi = {
     getPostsBySlug: (slug) => {
         return AxiosConfig.get(`/posts/${slug}`)
     },
+    editPostsBySlug: (slug, body) => {
+        return AxiosConfig.put(`/posts/${slug}`, body)
+    },
     reactionPosts: ({ id, body }) => {
         return AxiosConfig.post(`/posts/${id}/reactions`, body)
     },
