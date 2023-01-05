@@ -9,7 +9,8 @@ import { PostApi } from 'Apis/PostApi'
 import { Link, useParams } from 'react-router-dom'
 import DayJs from 'Utils/DayJs'
 import ActionPosts from './ActionPosts'
-
+import MarkdownIt from 'markdown-it'
+const mdParser = new MarkdownIt()
 export default function PostsPage() {
     const { slug } = useParams()
     const { data: Posts } = useQuery(['posts', slug], async () =>
@@ -83,7 +84,7 @@ export default function PostsPage() {
                                 </p>
                             ))} */}
                         </div>
-                        <div className="tuyn-custom-markdown pt-4 pb-6 sm:pt-5 sm:pb-7">
+                        <div className="tuyn-custom-markdown pt-4 pb-6 sm:pt-5 sm:pb-7 leading-10">
                             <ReactMarkdown
                                 children={Posts?.content}
                                 components={SyntaxHighlight}
