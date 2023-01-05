@@ -10,7 +10,6 @@ import { Link, useParams } from 'react-router-dom'
 import DayJs from 'Utils/DayJs'
 import ActionPosts from './ActionPosts'
 import MarkdownIt from 'markdown-it'
-const mdParser = new MarkdownIt()
 export default function PostsPage() {
     const { slug } = useParams()
     const { data: Posts } = useQuery(['posts', slug], async () =>

@@ -86,6 +86,13 @@ body::-webkit-scrollbar-thumb {
   color: orange;
   text-decoration: underline;
 }
+.tuyn-custom-markdown li{
+  list-style: initial;
+}
+.custom-html-style li{
+  list-style: initial;
+
+}
 .toast-tuyn {
   z-index: 1000;
   transition: transform 1s linear;
