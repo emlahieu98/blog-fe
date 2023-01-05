@@ -93,23 +93,35 @@ export default function PostsPage() {
                             <h1 className="font-semibold text-lg pb-4">
                                 Category
                             </h1>
-                            <ul className="pl-8 list-disc">
-                                {/* {Posts?.myPosts?.length > 0 ? (
-                                    Posts?.myPosts.map((post, index) => (
-                                        <Link
-                                            to={`/blog/${post.slug}`}
-                                            key={index}
+                            <ul className="p-1 list-disc">
+                                <div>
+                                    <div class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-blue-200 text-blue-700 rounded-full">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="feather feather-bell-off mr-2"
                                         >
-                                            <li className="hover:underline cursor-pointer">
-                                                {post.title}
-                                            </li>
-                                        </Link>
-                                    ))
-                                ) : (
-                                    <p className="text-orange-500">
-                                        Tác giả chưa có bài đăng nào khác.
-                                    </p>
-                                )} */}
+                                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                            <path d="M18.63 13A17.89 17.89 0 0 1 18 8"></path>
+                                            <path d="M6.26 6.26A5.86 5.86 0 0 0 6 8c0 7-3 9-3 9h14"></path>
+                                            <path d="M18 8a6 6 0 0 0-9.33-5"></path>
+                                            <line
+                                                x1="1"
+                                                y1="1"
+                                                x2="23"
+                                                y2="23"
+                                            ></line>
+                                        </svg>
+                                        Blockchain
+                                    </div>
+                                </div>
                             </ul>
                         </div>
                         <div className="mt-7">
@@ -121,16 +133,62 @@ export default function PostsPage() {
                             <h1 className="text-xl font-semibold pb-5">
                                 Recommended tags
                             </h1>
-                            <div className="flex gap-x-3 gap-y-2 p-3 flex-wrap">
-                                {/* {Posts?.tags.map((tag, index) => (
-                                    <p
-                                        className="px-3 py-1 text-black text-sm rounded-full cursor-pointer bg-slate-200"
-                                        key={index}
-                                    >
-                                        {tag.label}
-                                    </p>
-                                ))} */}
-                            </div>
+                            <ul className="p-1 list-disc">
+                                <div>
+                                    <div class="ml-4 text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-green-200 text-green-700 rounded-full">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="feather feather-arrow-right mr-2"
+                                        >
+                                            <line
+                                                x1="5"
+                                                y1="12"
+                                                x2="19"
+                                                y2="12"
+                                            ></line>
+                                            <polyline points="12 5 19 12 12 19"></polyline>
+                                        </svg>
+                                        Front end
+                                    </div>
+                                    <div class="ml-4 text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-red-200 text-red-700 rounded-full">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="feather feather-archive mr-2"
+                                        >
+                                            <polyline points="21 8 21 21 3 21 3 8"></polyline>
+                                            <rect
+                                                x="1"
+                                                y="3"
+                                                width="22"
+                                                height="5"
+                                            ></rect>
+                                            <line
+                                                x1="10"
+                                                y1="12"
+                                                x2="14"
+                                                y2="12"
+                                            ></line>
+                                        </svg>
+                                        Rust
+                                    </div>
+                                </div>
+                            </ul>
                         </div>
                     </section>
                 </main>
