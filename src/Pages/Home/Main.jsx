@@ -255,11 +255,11 @@ export default function Main() {
                         }}
                     >
                         <p className="text-sm font-bold text-600 text-3xl text-center">
-                            Lunar New Year is coming soon
+                            Lunar New Year 2024 is coming soon
                         </p>
                         <Countdown
                             className="text-xl p-4"
-                            date={'2023-01-01T00:00:00'}
+                            date={'2024-01-01T00:00:00'}
                             renderer={renderer}
                         />
                     </div>
@@ -274,9 +274,9 @@ export default function Main() {
                                     <div class="flex">
                                         <div class="mr-2">
                                             <img
-                                                class="rounded-full"
-                                                src="https://pbs.twimg.com/profile_images/1364491704817098753/V22-Luf7_normal.jpg"
-                                                alt="Elon"
+                                                class="rounded-full h-11 w-11"
+                                                src={item.avatar_url}
+                                                alt="icon"
                                             />
                                         </div>
                                         <div>
