@@ -86,6 +86,11 @@ body::-webkit-scrollbar-thumb {
   color: orange;
   text-decoration: underline;
 }
+.tuyn-custom-markdown pre {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+}
 .tuyn-custom-markdown li{
   list-style: initial;
 }
@@ -93,6 +98,7 @@ body::-webkit-scrollbar-thumb {
   list-style: initial;
 
 }
+
 .toast-tuyn {
   z-index: 1000;
   transition: transform 1s linear;

@@ -91,7 +91,7 @@ export const useWeb3Store = create((set, get) => ({
 }))
 
 export const Web3Provider = ({ children }) => {
-    const init = useWeb3Store((state) => state.connect)
+    const init = useWeb3Store((state) => state.init)
 
     useEffect(() => {
         if (!window.ethereum) {
