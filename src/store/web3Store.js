@@ -99,5 +99,6 @@ export const Web3Provider = ({ children }) => {
         }
         init()
     }, [ethers])
+
     return <>{children}</>
 }
