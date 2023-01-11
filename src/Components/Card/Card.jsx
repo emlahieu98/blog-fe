@@ -13,7 +13,9 @@ const buttonText = {
 
 const Card = ({ nft }) => {
     const { walletAddress, marketplaceContract, nftContract } = useWeb3Store()
+
     const navigate = useNavigate()
+
     const handleBuyNFT = async (e, nft) => {
         // e.preventDefault()
         if (e.target.innerText === buttonText.buy) {
