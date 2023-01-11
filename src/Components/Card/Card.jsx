@@ -32,7 +32,7 @@ const Card = ({ nft }) => {
             if (txnReceipt.status) {
                 toast.success('Buying NFT on the market successfully')
                 setTimeout(() => {
-                    navigate(`/@${walletAddress}`)
+                    navigate(`/me/${walletAddress}`)
                 }, 1000)
             }
         }
@@ -52,7 +52,7 @@ const Card = ({ nft }) => {
             if (txnReceipt.status) {
                 toast.success('Delist NFT on the market successfully')
                 setTimeout(() => {
-                    navigate(`/@${walletAddress}`)
+                    navigate(`/me/${walletAddress}`)
                 }, 1000)
             }
         }
