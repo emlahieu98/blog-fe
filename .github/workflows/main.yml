@@ -13,7 +13,7 @@ jobs:
 
         strategy:
             matrix:
-                node-version: [18.12.1]
+                node-version: [18.]
 
         steps:
             - uses: actions/checkout@v2
@@ -21,6 +21,7 @@ jobs:
               uses: actions/setup-node@v1
               with:
                   node-version: ${{ matrix.node-version }}
+            - run: git pull master
             - run: node -v
             - run: yarn --ignore-engines
             - run: yarn build
