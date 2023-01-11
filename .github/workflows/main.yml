@@ -21,7 +21,7 @@ jobs:
               uses: actions/setup-node@v1
               with:
                   node-version: ${{ matrix.node-version }}
-            - run: git pull master
+            - run: git pull origin master
             - run: node -v
             - run: yarn --ignore-engines
             - run: yarn build
